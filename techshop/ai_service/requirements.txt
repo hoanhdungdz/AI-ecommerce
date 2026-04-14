@@ -1,0 +1,10 @@
+fastapi==0.110.0
+uvicorn==0.28.0
+pydantic>=1.10,<3.0
+numpy==1.26.4
+# Deep Learning
+tensorflow-cpu==2.15.0
+# RAG - Vector Database
+chromadb>=0.4.0
+# Embedding (Local, miễn phí - không cần OpenAI API key)
+sentence-transformers>=2.2.0

@@ -1,0 +1,93 @@
+[
+  {
+    "model": "tablet_app.tablet",
+    "pk": 1,
+    "fields": {
+      "name": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "price": "32000000.00",
+      "description": "Chip A17 Pro mạnh mẽ nhất thế giới smartphone.",
+      "quantity": 20,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 2,
+    "fields": {
+      "name": "Samsung Galaxy S24 Ultra",
+      "brand": "Samsung",
+      "price": "28500000.00",
+      "description": "Siêu camera 200MP và bút S-Pen đa năng.",
+      "quantity": 15,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 3,
+    "fields": {
+      "name": "Xiaomi 14 Pro",
+      "brand": "Xiaomi",
+      "price": "22000000.00",
+      "description": "Chip Snapdragon 8 Gen 3 và camera Leica cực đỉnh.",
+      "quantity": 12,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 4,
+    "fields": {
+      "name": "Samsung Galaxy Z Fold 5",
+      "brand": "Samsung",
+      "price": "35000000.00",
+      "description": "Siêu phẩm màn hình gập thế hệ mới nhất, mở ra trải nghiệm vô tận.",
+      "quantity": 5,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 5,
+    "fields": {
+      "name": "Google Pixel 8 Pro",
+      "brand": "Google",
+      "price": "24000000.00",
+      "description": "Đỉnh cao nhiếp ảnh di động với sức mạnh AI thuần khiết.",
+      "quantity": 8,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 6,
+    "fields": {
+      "name": "Sony Xperia 1 V",
+      "brand": "Sony",
+      "price": "27000000.00",
+      "description": "Màn hình 4K HDR và cảm biến Exmor T cho chất lượng điện ảnh.",
+      "quantity": 6,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tablet_app.tablet",
+    "pk": 7,
+    "fields": {
+      "name": "OPPO Reno11 Pro 5G",
+      "brand": "OPPO",
+      "price": "14500000.00",
+      "description": "Thiết kế cao cấp, sạc siêu nhanh VOOC đặc trưng.",
+      "quantity": 15,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  }
+]

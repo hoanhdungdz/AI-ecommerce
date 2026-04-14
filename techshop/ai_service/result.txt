@@ -1,0 +1,8 @@
+Testing OpenAIEmbeddings with openai_api_key
+ValidationError(model='OpenAIEmbeddings', errors=[{'loc': ('__root__',), 'msg': "Client.__init__() got an unexpected keyword argument 'proxies'", 'type': 'type_error'}])
+Testing OpenAIEmbeddings with api_key
+ValidationError(model='OpenAIEmbeddings', errors=[{'loc': ('__root__',), 'msg': "Client.__init__() got an unexpected keyword argument 'proxies'", 'type': 'type_error'}])
+Testing ChatOpenAI with openai_api_key
+ValidationError(model='ChatOpenAI', errors=[{'loc': ('__root__',), 'msg': "Client.__init__() got an unexpected keyword argument 'proxies'", 'type': 'type_error'}])
+Testing ChatOpenAI with api_key
+ValidationError(model='ChatOpenAI', errors=[{'loc': ('__root__',), 'msg': "Client.__init__() got an unexpected keyword argument 'proxies'", 'type': 'type_error'}])
