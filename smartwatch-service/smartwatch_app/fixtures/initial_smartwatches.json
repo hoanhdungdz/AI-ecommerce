@@ -1,0 +1,93 @@
+[
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 1,
+    "fields": {
+      "name": "Apple Watch Series 9 GPS 45mm",
+      "brand": "Apple",
+      "price": "10990000.00",
+      "description": "Màn hình sáng, đo nhịp tim và SpO2 chính xác, tối ưu cho hệ sinh thái iPhone.",
+      "quantity": 18,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 2,
+    "fields": {
+      "name": "Apple Watch Ultra 2",
+      "brand": "Apple",
+      "price": "19990000.00",
+      "description": "Thiết kế titanium siêu bền, pin lâu, phù hợp tập luyện cường độ cao và outdoor.",
+      "quantity": 10,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 3,
+    "fields": {
+      "name": "Samsung Galaxy Watch6 Classic 47mm",
+      "brand": "Samsung",
+      "price": "8990000.00",
+      "description": "Vòng xoay vật lý đặc trưng, theo dõi sức khỏe chuyên sâu, hỗ trợ Android tốt.",
+      "quantity": 16,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 4,
+    "fields": {
+      "name": "Samsung Galaxy Watch5 Pro",
+      "brand": "Samsung",
+      "price": "7490000.00",
+      "description": "Pin bền bỉ, GPS chính xác, phù hợp chạy bộ và đạp xe đường dài.",
+      "quantity": 14,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 5,
+    "fields": {
+      "name": "Garmin Forerunner 265",
+      "brand": "Garmin",
+      "price": "11990000.00",
+      "description": "Smartwatch thể thao chuyên nghiệp, theo dõi VO2 Max, pace và recovery chi tiết.",
+      "quantity": 9,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 6,
+    "fields": {
+      "name": "Huawei Watch GT 4 46mm",
+      "brand": "Huawei",
+      "price": "5490000.00",
+      "description": "Thiết kế sang, pin dài ngày, theo dõi giấc ngủ và stress ổn định.",
+      "quantity": 20,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "smartwatch_app.smartwatch",
+    "pk": 7,
+    "fields": {
+      "name": "Xiaomi Watch 2 Pro",
+      "brand": "Xiaomi",
+      "price": "4890000.00",
+      "description": "Wear OS mượt, nhiều app, GPS đa băng tần và đo luyện tập khá chính xác.",
+      "quantity": 17,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  }
+]

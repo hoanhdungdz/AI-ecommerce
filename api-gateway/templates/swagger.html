@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mixi Swagger UI</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css"
+    />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script
+      src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js"
+      crossorigin
+    ></script>
+    <script>
+      window.onload = () => {
+        window.ui = SwaggerUIBundle({
+          spec: {
+            openapi: "3.0.0",
+            info: {
+              title: "Mixi Microservices API",
+              version: "1.0.0",
+              description:
+                "API Gateway OpenAPI Specification for Mixi (Customer, Staff, Laptop, Mobile, Tablet, Accessory, Smartwatch)",
+            },
+            paths: {
+              "/api/customers/login/": {
+                post: {
+                  tags: ["Customer"],
+                  summary: "Đăng nhập khách hàng",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/register/": {
+                post: {
+                  tags: ["Customer"],
+                  summary: "Đăng ký thành viên",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/profile/": {
+                get: {
+                  tags: ["Customer"],
+                  summary: "Lấy thông tin cá nhân",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/profile/update/": {
+                put: {
+                  tags: ["Customer"],
+                  summary: "Cập nhật thông tin",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/": {
+                get: {
+                  tags: ["Customer - Cart"],
+                  summary: "Lấy danh sách giỏ hàng",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/create/": {
+                post: {
+                  tags: ["Customer - Cart"],
+                  summary: "Tạo giỏ hàng mới",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/add/": {
+                post: {
+                  tags: ["Customer - Cart"],
+                  summary: "Thêm sản phẩm vào giỏ",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/remove/{item_id}/": {
+                delete: {
+                  tags: ["Customer - Cart"],
+                  summary: "Xóa sản phẩm khỏi giỏ",
+                  parameters: [
+                    {
+                      name: "item_id",
+                      in: "path",
+                      required: true,
+                      schema: { type: "integer" },
+                    },
+                  ],
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/delete/{cart_id}/": {
+                delete: {
+                  tags: ["Customer - Cart"],
+                  summary: "Xóa toàn bộ giỏ hàng",
+                  parameters: [
+                    {
+                      name: "cart_id",
+                      in: "path",
+                      required: true,
+                      schema: { type: "integer" },
+                    },
+                  ],
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/cart/checkout/{cart_id}/": {
+                post: {
+                  tags: ["Customer - Cart"],
+                  summary: "Thanh toán giỏ hàng",
+                  parameters: [
+                    {
+                      name: "cart_id",
+                      in: "path",
+                      required: true,
+                      schema: { type: "integer" },
+                    },
+                  ],
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/orders/": {
+                get: {
+                  tags: ["Customer"],
+                  summary: "Lịch sử mua hàng",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/customers/search/": {
+                get: {
+                  tags: ["Customer"],
+                  summary: "Tìm kiếm sản phẩm",
+                  parameters: [
+                    { name: "q", in: "query", schema: { type: "string" } },
+                  ],
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+
+              "/api/staff/login/": {
+                post: {
+                  tags: ["Staff"],
+                  summary: "Đăng nhập nhân viên",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/staff/register/": {
+                post: {
+                  tags: ["Staff"],
+                  summary: "Đăng ký nhân viên",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/staff/products/add/": {
+                post: {
+                  tags: ["Staff"],
+                  summary: "Thêm sản phẩm mới",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/staff/products/update/{product_id}/": {
+                put: {
+                  tags: ["Staff"],
+                  summary: "Cập nhật sản phẩm",
+                  parameters: [
+                    {
+                      name: "product_id",
+                      in: "path",
+                      required: true,
+                      schema: { type: "integer" },
+                    },
+                  ],
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+
+              "/api/laptops/": {
+                get: {
+                  tags: ["Inventory"],
+                  summary: "Danh sách Laptop",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/mobiles/": {
+                get: {
+                  tags: ["Inventory"],
+                  summary: "Danh sách Điện thoại",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/tablets/": {
+                get: {
+                  tags: ["Inventory"],
+                  summary: "Danh sách Tablet",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/accessories/": {
+                get: {
+                  tags: ["Inventory"],
+                  summary: "Danh sách Phụ kiện",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+              "/api/smartwatches/": {
+                get: {
+                  tags: ["Inventory"],
+                  summary: "Danh sách Smartwatch",
+                  responses: { 200: { description: "Thành công" } },
+                },
+              },
+            },
+          },
+          dom_id: "#swagger-ui",
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1780 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mixi - Khách Hàng</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #eef2ff;
+        --success: #10b981;
+        --success-light: #d1fae5;
+        --danger: #ef4444;
+        --danger-light: #fee2e2;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-900: #111827;
+        --radius: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          sans-serif;
+        background: var(--gray-50);
+        min-height: 100vh;
+        color: var(--gray-900);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ===== NAVBAR ===== */
+      .navbar {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--gray-200);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .nav-btn {
+        padding: 8px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid transparent;
+        position: relative;
+        white-space: nowrap;
+      }
+      .nav-btn-cart {
+        background: var(--primary-light);
+        color: var(--primary);
+      }
+      .nav-btn-cart:hover {
+        background: #e0e7ff;
+      }
+      .nav-btn-profile {
+        background: var(--success-light);
+        color: var(--success);
+      }
+      .nav-btn-profile:hover {
+        background: #a7f3d0;
+      }
+      .nav-btn-logout {
+        background: var(--danger-light);
+        color: var(--danger);
+      }
+      .nav-btn-logout:hover {
+        background: #fecaca;
+      }
+      .nav-user {
+        font-size: 13px;
+        color: var(--gray-700);
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+        box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
+      }
+
+      /* ===== BUTTONS ===== */
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+      }
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        transform: translateY(-1px);
+      }
+      .btn-add-cart {
+        background: var(--success-light);
+        color: var(--success);
+        border: 1px solid #a7f3d0;
+        font-size: 12px;
+        padding: 8px 14px;
+        border-radius: 10px;
+      }
+      .btn-add-cart:hover {
+        background: #a7f3d0;
+        transform: translateY(-1px);
+      }
+
+      /* ===== AUTH PAGE ===== */
+      .auth-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          160deg,
+          #ede9fe 0%,
+          #e0e7ff 50%,
+          #dbeafe 100%
+        );
+        padding: 20px;
+      }
+      .auth-card {
+        background: #fff;
+        border-radius: var(--radius-xl);
+        padding: 36px 32px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        animation: fadeUp 0.5s ease;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .auth-card .logo-section {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .auth-card .logo-icon {
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(135deg, var(--primary), #818cf8);
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
+      .auth-card h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--gray-900);
+      }
+      .auth-card .subtitle {
+        font-size: 13px;
+        color: var(--gray-400);
+        margin-top: 2px;
+      }
+
+      .tabs {
+        display: flex;
+        background: var(--gray-100);
+        border-radius: 10px;
+        padding: 3px;
+        margin: 20px 0;
+      }
+      .tab {
+        flex: 1;
+        padding: 9px;
+        text-align: center;
+        color: var(--gray-500);
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .tab.active {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+      }
+
+      .form-group {
+        margin-bottom: 14px;
+      }
+      .form-group label {
+        display: block;
+        color: var(--gray-700);
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        letter-spacing: 0.01em;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        background: var(--gray-50);
+        border: 1.5px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: inherit;
+        color: var(--gray-900);
+        transition: var(--transition);
+        outline: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        background: #fff;
+      }
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: var(--gray-400);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 70px;
+      }
+
+      .auth-card .btn {
+        width: 100%;
+        padding: 12px;
+        margin-top: 4px;
+        font-size: 14px;
+      }
+      .switch-link {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--gray-400);
+      }
+      .switch-link a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .switch-link a:hover {
+        text-decoration: underline;
+      }
+
+      .message {
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        margin-bottom: 12px;
+        display: none;
+        font-weight: 500;
+        animation: fadeUp 0.3s ease;
+      }
+      .message.success {
+        background: var(--success-light);
+        border: 1px solid #a7f3d0;
+        color: var(--success);
+        display: block;
+      }
+      .message.error {
+        background: var(--danger-light);
+        border: 1px solid #fecaca;
+        color: var(--danger);
+        display: block;
+      }
+
+      /* ===== DASHBOARD ===== */
+      .dashboard {
+        display: none;
+      }
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 24px;
+      }
+
+      .hero-banner {
+        background: linear-gradient(
+          135deg,
+          #6366f1 0%,
+          #8b5cf6 50%,
+          #a78bfa 100%
+        );
+        color: #fff;
+        border-radius: var(--radius-xl);
+        padding: 32px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-banner::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+      }
+      .hero-banner::after {
+        content: "";
+        position: absolute;
+        bottom: -40%;
+        left: 10%;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+      .hero-banner h2 {
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-banner p {
+        font-size: 14px;
+        opacity: 0.85;
+        position: relative;
+        z-index: 1;
+      }
+
+      .search-section {
+        background: #fff;
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        margin-bottom: 24px;
+        border: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-sm);
+      }
+      .search-section h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .search-bar {
+        display: flex;
+        gap: 10px;
+      }
+      .search-bar input {
+        flex: 1;
+        padding: 12px 16px;
+        background: var(--gray-50);
+        border: 1.5px solid var(--gray-200);
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        color: var(--gray-900);
+      }
+      .search-bar input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+
+      .section-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gray-500);
+        margin: 24px 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .product-card {
+        background: #fff;
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        border: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+      }
+      .product-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+        border-color: var(--gray-300);
+      }
+      .product-card .p-type-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 3px 8px;
+        border-radius: 6px;
+      }
+      .p-type-laptop {
+        background: #ede9fe;
+        color: #7c3aed;
+      }
+      .p-type-mobile {
+        background: #fef3c7;
+        color: #d97706;
+      }
+      .p-type-generic {
+        background: #e5e7eb;
+        color: #374151;
+      }
+      .product-card .p-brand {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--primary);
+        margin-bottom: 4px;
+      }
+      .product-card .p-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 6px;
+        line-height: 1.35;
+        padding-right: 60px;
+      }
+      .product-card .p-desc {
+        font-size: 13px;
+        color: var(--gray-400);
+        margin-bottom: 14px;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .product-card .p-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .product-card .p-price {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--success);
+      }
+      .product-card .p-qty {
+        font-size: 11px;
+        color: var(--gray-400);
+        margin-top: 2px;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 48px 20px;
+        color: var(--gray-400);
+        font-size: 14px;
+      }
+      .empty-state .empty-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+        opacity: 0.5;
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        padding: 20px;
+      }
+      .modal-overlay.active {
+        display: flex;
+      }
+      .modal {
+        background: #fff;
+        border-radius: var(--radius-xl);
+        padding: 28px;
+        width: 100%;
+        max-width: 460px;
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalIn 0.3s ease;
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .modal h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--gray-100);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-500);
+        transition: var(--transition);
+      }
+      .modal-close:hover {
+        background: var(--gray-200);
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--gray-100);
+      }
+      .cart-item:last-child {
+        border-bottom: none;
+      }
+      .cart-item .ci-info h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--gray-900);
+      }
+      .cart-item .ci-info p {
+        font-size: 12px;
+        color: var(--gray-400);
+        margin-top: 2px;
+      }
+      .cart-item .ci-price {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary);
+        white-space: nowrap;
+        margin-left: 12px;
+      }
+      .cart-item .ci-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cart-item .ci-delete {
+        background: none;
+        border: none;
+        color: var(--gray-400);
+        cursor: pointer;
+        font-size: 16px;
+        padding: 4px;
+        border-radius: 6px;
+        transition: var(--transition);
+      }
+      .cart-item .ci-delete:hover {
+        color: var(--danger);
+        background: var(--danger-light);
+      }
+      .cart-group-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--gray-400);
+        margin: 14px 0 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0 16px;
+          height: 56px;
+        }
+        .logo {
+          font-size: 18px;
+        }
+        .nav-user {
+          display: none;
+        }
+        .nav-btn {
+          padding: 7px 10px;
+          font-size: 12px;
+          gap: 4px;
+        }
+        .nav-btn span.btn-text {
+          display: none;
+        }
+
+        .main-content {
+          padding: 16px;
+        }
+        .hero-banner {
+          padding: 24px 20px;
+          border-radius: var(--radius);
+        }
+        .hero-banner h2 {
+          font-size: 18px;
+        }
+        .hero-banner p {
+          font-size: 13px;
+        }
+
+        .search-section {
+          padding: 16px;
+          border-radius: var(--radius);
+        }
+        .search-bar {
+          flex-direction: column;
+        }
+        .search-bar .btn {
+          width: 100%;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .product-card {
+          padding: 14px;
+        }
+        .product-card .p-name {
+          font-size: 13px;
+          padding-right: 50px;
+        }
+        .product-card .p-desc {
+          font-size: 12px;
+          -webkit-line-clamp: 1;
+        }
+        .product-card .p-price {
+          font-size: 15px;
+        }
+        .product-card .p-type-badge {
+          top: 10px;
+          right: 10px;
+          font-size: 9px;
+        }
+        .btn-add-cart {
+          font-size: 11px;
+          padding: 6px 10px;
+        }
+
+        .modal {
+          padding: 24px 20px;
+          border-radius: var(--radius-lg);
+          max-width: 100%;
+        }
+
+        .auth-page {
+          padding: 16px;
+        }
+        .auth-card {
+          padding: 28px 24px;
+          border-radius: var(--radius-lg);
+        }
+      }
+
+      @media (max-width: 400px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-btn-profile span.btn-text,
+        .nav-btn-logout span.btn-text {
+          display: none;
+        }
+      }
+
+      /* ===== CHATBOT WIDGET ===== */
+      .chatbot-widget {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .chat-toggle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: #fff;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chat-toggle:hover {
+        transform: scale(1.05);
+      }
+      .chat-window {
+        width: 340px;
+        height: 480px;
+        max-height: 80vh;
+        background: #fff;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+        transition: var(--transition);
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        border: 1px solid var(--gray-200);
+      }
+      .chat-window.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .chat-header {
+        background: linear-gradient(135deg, var(--primary), #818cf8);
+        color: #fff;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chat-header h3 {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chat-body {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        background: var(--gray-50);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .chat-msg {
+        max-width: 85%;
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .msg-bot {
+        background: #fff;
+        color: var(--gray-900);
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+        border: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-sm);
+      }
+      .msg-user {
+        background: var(--primary);
+        color: #fff;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.2);
+      }
+      .chat-input-area {
+        padding: 12px;
+        border-top: 1px solid var(--gray-200);
+        background: #fff;
+        display: flex;
+        gap: 8px;
+      }
+      .chat-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid var(--gray-200);
+        border-radius: 20px;
+        outline: none;
+        font-family: inherit;
+        font-size: 13px;
+        transition: var(--transition);
+      }
+      .chat-input:focus {
+        border-color: var(--primary);
+      }
+      .chat-send-btn {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .chat-send-btn:hover {
+        background: var(--primary-dark);
+      }
+      .chat-typing {
+        font-size: 11px;
+        color: var(--gray-400);
+        margin-left: 10px;
+        font-style: italic;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==================== AUTH PAGE ==================== -->
+    <div class="auth-page" id="authPage">
+      <div class="auth-card">
+        <div class="logo-section">
+          <div class="logo-icon">🛒</div>
+          <h1>Khách Hàng</h1>
+          <p class="subtitle">Đăng nhập để mua sắm</p>
+        </div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab('login')">Đăng nhập</div>
+          <div class="tab" onclick="switchTab('register')">Đăng ký</div>
+        </div>
+        <div id="messageBox" class="message"></div>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Tên đăng nhập</label
+            ><input
+              type="text"
+              id="loginUsername"
+              placeholder="Nhập tên đăng nhập"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Mật khẩu</label
+            ><input
+              type="password"
+              id="loginPassword"
+              placeholder="Nhập mật khẩu"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        </form>
+        <form id="registerForm" class="hidden" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>Tên đăng nhập</label
+            ><input
+              type="text"
+              id="regUsername"
+              placeholder="Nhập tên đăng nhập"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label
+            ><input
+              type="email"
+              id="regEmail"
+              placeholder="Nhập email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Họ và tên</label
+            ><input type="text" id="regFullName" placeholder="Nhập họ và tên" />
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại</label
+            ><input
+              type="text"
+              id="regPhone"
+              placeholder="Nhập số điện thoại"
+            />
+          </div>
+          <div class="form-group">
+            <label>Mật khẩu</label
+            ><input
+              type="password"
+              id="regPassword"
+              placeholder="Nhập mật khẩu"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Đăng ký</button>
+        </form>
+        <div class="switch-link">
+          <a href="/staff/login/">Đăng nhập với tư cách Nhân viên →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <div class="dashboard" id="dashboardPage">
+      <nav class="navbar">
+        <div class="logo">⚡ Mixi</div>
+        <div class="nav-right">
+          <span class="nav-user" id="customerName"></span>
+          <button class="nav-btn" onclick="openOrderModal()" title="Đơn mua">
+            <span class="btn-text">Đơn mua</span>📦
+          </button>
+          <button class="nav-btn nav-btn-cart" onclick="openCartModal()">
+            🛒 <span class="btn-text">Giỏ hàng</span
+            ><span class="cart-badge" id="cartBadge" style="display: none"
+              >0</span
+            >
+          </button>
+          <button class="nav-btn nav-btn-profile" onclick="openProfileModal()">
+            👤 <span class="btn-text">Tài khoản</span>
+          </button>
+          <button class="nav-btn nav-btn-logout" onclick="handleLogout()">
+            <span class="btn-text">Đăng xuất</span>🚪
+          </button>
+        </div>
+      </nav>
+
+      <div class="main-content">
+        <div class="hero-banner">
+          <h2>🛍️ Chào mừng đến Mixi!</h2>
+          <p>Khám phá bộ sưu tập laptop và điện thoại hàng đầu</p>
+        </div>
+        <div id="dashMessage" class="message"></div>
+        <div class="search-section">
+          <h3>🔍 Tìm kiếm sản phẩm</h3>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Tìm theo tên, hãng..."
+              onkeypress="if (event.key === 'Enter') searchProducts();"
+            />
+            <button class="btn btn-primary" onclick="searchProducts()">
+              🔍 Tìm kiếm
+            </button>
+          </div>
+        </div>
+        <div id="productShowcase"></div>
+      </div>
+    </div>
+
+    <!-- ==================== CART MODAL ==================== -->
+    <div class="modal-overlay" id="cartModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
+        <h2>🛒 Giỏ hàng</h2>
+        <div id="cartModalMessage" class="message"></div>
+        <button
+          class="btn btn-primary"
+          style="width: 100%; margin-bottom: 16px"
+          onclick="createCart()"
+        >
+          ➕ Tạo giỏ hàng mới
+        </button>
+        <div id="cartContent"></div>
+      </div>
+    </div>
+
+    <!-- ==================== PROFILE MODAL ==================== -->
+    <div class="modal-overlay" id="profileModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('profileModal')">
+          ✕
+        </button>
+        <h2>👤 Thông tin cá nhân</h2>
+        <div id="profileMessage" class="message"></div>
+        <form onsubmit="updateProfile(event)">
+          <div class="form-group">
+            <label>Tên đăng nhập</label
+            ><input
+              type="text"
+              id="profileUsername"
+              disabled
+              style="opacity: 0.5; cursor: not-allowed"
+            />
+          </div>
+          <div class="form-group">
+            <label>Họ và tên</label
+            ><input
+              type="text"
+              id="profileFullName"
+              placeholder="Nhập họ và tên"
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label
+            ><input type="email" id="profileEmail" placeholder="Nhập email" />
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại</label
+            ><input
+              type="text"
+              id="profilePhone"
+              placeholder="Nhập số điện thoại"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              >Mật khẩu mới
+              <span style="color: var(--gray-400); font-weight: 400"
+                >(để trống nếu không đổi)</span
+              ></label
+            ><input type="password" id="profilePassword" placeholder="••••••" />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            💾 Lưu thay đổi
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================== CHECKOUT MODAL ==================== -->
+    <div class="modal-overlay" id="checkoutModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('checkoutModal')">
+          ✕
+        </button>
+        <h2>💳 Thanh toán Đơn hàng</h2>
+        <div id="checkoutMessage" class="message"></div>
+        <form onsubmit="confirmCheckout(event)">
+          <input type="hidden" id="checkoutCartId" />
+          <div class="form-group">
+            <label>📍 Địa chỉ nhận hàng</label>
+            <textarea
+              id="checkoutAddress"
+              placeholder="Nhập địa chỉ nhận hàng chi tiết..."
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>💵 Phương thức thanh toán</label>
+            <select id="checkoutMethod" required>
+              <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+              <option value="momo">Ví điện tử MoMo</option>
+              <option value="vnpay">Cổng thanh toán VNPay</option>
+              <option value="card">Thẻ tín dụng/Ghi nợ</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 10px"
+          >
+            ✅ Xác nhận & Đặt hàng
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================== ORDER MODAL ==================== -->
+    <div class="modal-overlay" id="orderModal">
+      <div class="modal modal-lg">
+        <button class="modal-close" onclick="closeModal('orderModal')">
+          ✕
+        </button>
+        <h2>📦 Lịch sử Đơn hàng</h2>
+        <div id="orderModalMessage" class="message"></div>
+        <div
+          id="orderContent"
+          style="
+            margin-top: 15px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 5px;
+          "
+        >
+          Đang tải...
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CHATBOT WIDGET ==================== -->
+    <div class="chatbot-widget" id="chatbotWidget" style="display: none">
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <h3>🤖 TechShop AI</h3>
+          <button
+            onclick="toggleChat()"
+            style="
+              background: none;
+              border: none;
+              color: #fff;
+              cursor: pointer;
+              font-size: 16px;
+            "
+          >
+            ✕
+          </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="chat-msg msg-bot">
+            Xin chào! Tôi là trợ lý AI thông minh của Mixi. Tôi có thể tư vấn
+            laptop, điện thoại, tablet, phụ kiện và smartwatch.
+          </div>
+        </div>
+        <div class="chat-typing" id="chatTyping">Đang gõ...</div>
+        <div class="chat-input-area">
+          <input
+            type="text"
+            class="chat-input"
+            id="chatInput"
+            placeholder="Hỏi về sản phẩm..."
+            onkeypress="if (event.key === 'Enter') sendChatMessage();"
+          />
+          <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+        </div>
+      </div>
+      <button class="chat-toggle" onclick="toggleChat()">💬</button>
+    </div>
+
+    <script>
+      const API = window.location.origin;
+      let token = localStorage.getItem("customer_token");
+      let cartId = localStorage.getItem("customer_cart_id");
+      if (token) showDashboard();
+
+      const TYPE_META = {
+        laptop: { label: "Laptop", icon: "💻", badgeClass: "p-type-laptop" },
+        mobile: { label: "Mobile", icon: "📱", badgeClass: "p-type-mobile" },
+        tablet: { label: "Tablet", icon: "🧾", badgeClass: "p-type-generic" },
+        accessory: {
+          label: "Accessory",
+          icon: "🎧",
+          badgeClass: "p-type-generic",
+        },
+        smartwatch: {
+          label: "Smartwatch",
+          icon: "⌚",
+          badgeClass: "p-type-generic",
+        },
+      };
+
+      function getTypeMeta(productType) {
+        const key = String(productType || "").toLowerCase();
+        if (TYPE_META[key]) {
+          return TYPE_META[key];
+        }
+        const label = key
+          ? key.charAt(0).toUpperCase() + key.slice(1)
+          : "Product";
+        return { label, icon: "🧩", badgeClass: "p-type-generic" };
+      }
+
+      function switchTab(t) {
+        document
+          .querySelectorAll(".tab")
+          .forEach((el, i) =>
+            el.classList.toggle(
+              "active",
+              (t === "login" && i === 0) || (t === "register" && i === 1),
+            ),
+          );
+        document
+          .getElementById("loginForm")
+          .classList.toggle("hidden", t !== "login");
+        document
+          .getElementById("registerForm")
+          .classList.toggle("hidden", t !== "register");
+        document.getElementById("messageBox").className = "message";
+      }
+
+      function msg(id, text, type) {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        el.className = `message ${type}`;
+        setTimeout(() => (el.className = "message"), 4000);
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("active");
+      }
+      document.querySelectorAll(".modal-overlay").forEach((o) =>
+        o.addEventListener("click", (e) => {
+          if (e.target === o) o.classList.remove("active");
+        }),
+      );
+
+      async function handleLogin(e) {
+        e.preventDefault();
+        try {
+          const r = await fetch(`${API}/api/customers/login/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username: document.getElementById("loginUsername").value,
+              password: document.getElementById("loginPassword").value,
+            }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            token = d.token;
+            localStorage.setItem("customer_token", token);
+            localStorage.setItem(
+              "customer_name",
+              d.customer.full_name || d.customer.username,
+            );
+            showDashboard();
+          } else msg("messageBox", d.error || "Đăng nhập thất bại!", "error");
+        } catch (e) {
+          msg("messageBox", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function handleRegister(e) {
+        e.preventDefault();
+        try {
+          const r = await fetch(`${API}/api/customers/register/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username: document.getElementById("regUsername").value,
+              email: document.getElementById("regEmail").value,
+              full_name: document.getElementById("regFullName").value,
+              phone: document.getElementById("regPhone").value,
+              password: document.getElementById("regPassword").value,
+            }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            token = d.token;
+            localStorage.setItem("customer_token", token);
+            localStorage.setItem(
+              "customer_name",
+              d.customer.full_name || d.customer.username,
+            );
+            showDashboard();
+          } else msg("messageBox", JSON.stringify(d), "error");
+        } catch (e) {
+          msg("messageBox", "Lỗi kết nối!", "error");
+        }
+      }
+
+      function showDashboard() {
+        document.getElementById("authPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+        document.getElementById("customerName").textContent =
+          localStorage.getItem("customer_name") || "Khách hàng";
+        loadAllProducts();
+        loadCartCount();
+        document.getElementById("chatbotWidget").style.display = "flex";
+      }
+
+      function handleLogout() {
+        token = null;
+        localStorage.removeItem("customer_token");
+        localStorage.removeItem("customer_name");
+        localStorage.removeItem("customer_cart_id");
+        document.getElementById("authPage").style.display = "flex";
+        document.getElementById("dashboardPage").style.display = "none";
+      }
+
+      // Products
+      async function loadAllProducts() {
+        searchProducts("", 0);
+      }
+      async function searchProducts(q, retryCount = 0) {
+        if (q === undefined) q = document.getElementById("searchInput").value;
+        try {
+          const r = await fetch(
+            `${API}/api/customers/search/?q=${encodeURIComponent(q)}`,
+          );
+          const d = await r.json();
+          renderProducts(d);
+
+          // During startup, customer-service may respond before inventory services are reachable.
+          const hasAnyProduct = Object.values(d || {}).some(
+            (items) => Array.isArray(items) && items.length > 0,
+          );
+          if (!q && !hasAnyProduct && retryCount < 5) {
+            setTimeout(() => searchProducts("", retryCount + 1), 2000);
+          }
+        } catch (e) {
+          msg("dashMessage", "Lỗi kết nối!", "error");
+
+          if (!q && retryCount < 5) {
+            setTimeout(() => searchProducts("", retryCount + 1), 2000);
+          }
+        }
+      }
+
+      function renderProducts(d) {
+        let h = "";
+        const entries = Object.entries(d || {});
+        entries.forEach(([productType, products]) => {
+          if (!Array.isArray(products) || !products.length) {
+            return;
+          }
+          const meta = getTypeMeta(productType);
+          h += `<div class="section-label">${meta.icon} ${meta.label}</div><div class="product-grid">`;
+          products.forEach((p) => {
+            h += `<div class="product-card"><span class="p-type-badge ${meta.badgeClass}">${meta.label}</span><div class="p-brand">${p.brand}</div><div class="p-name">${p.name}</div><div class="p-desc">${p.description || ""}</div><div class="p-bottom"><div><div class="p-price">${Number(p.price).toLocaleString()}đ</div><div class="p-qty">Còn ${p.quantity} sp</div></div><button class="btn btn-add-cart" onclick="addToCart(${p.id},'${productType}')">+ Thêm</button></div></div>`;
+          });
+          h += "</div>";
+        });
+
+        if (!h) {
+          h =
+            '<div class="empty-state"><div class="empty-icon">🔍</div>Không tìm thấy sản phẩm nào.</div>';
+        }
+        document.getElementById("productShowcase").innerHTML = h;
+      }
+
+      // Cart
+      async function loadCartCount() {
+        try {
+          const r = await fetch(`${API}/api/customers/cart/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          let c = 0;
+          if (Array.isArray(d))
+            d.forEach((x) => (c += x.items ? x.items.length : 0));
+          const b = document.getElementById("cartBadge");
+          if (c > 0) {
+            b.textContent = c;
+            b.style.display = "flex";
+          } else b.style.display = "none";
+        } catch (e) {}
+      }
+
+      function openCartModal() {
+        document.getElementById("cartModal").classList.add("active");
+        loadCart();
+      }
+
+      async function createCart() {
+        try {
+          const r = await fetch(`${API}/api/customers/cart/create/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const d = await r.json();
+          if (r.ok) {
+            cartId = d.cart.id;
+            localStorage.setItem("customer_cart_id", cartId);
+            msg(
+              "cartModalMessage",
+              `Tạo giỏ hàng #${d.cart.id} thành công!`,
+              "success",
+            );
+            loadCart();
+          } else msg("cartModalMessage", d.error, "error");
+        } catch (e) {
+          msg("cartModalMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function loadCart() {
+        try {
+          const r = await fetch(`${API}/api/customers/cart/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          const c = document.getElementById("cartContent");
+          if (!d.length) {
+            c.innerHTML =
+              '<div class="empty-state"><div class="empty-icon">🛒</div>Chưa có giỏ hàng. Tạo giỏ hàng mới!</div>';
+            return;
+          }
+          let h = "";
+          d.forEach((cart, index) => {
+            let cartTotal = 0;
+            if (cart.items.length) {
+              cart.items.forEach(
+                (i) => (cartTotal += parseFloat(i.product_price) * i.quantity),
+              );
+            }
+            // Fix numbering: newest cart will be highest number, e.g if 3 carts, newest is 3
+            let cartDisplayNum = d.length - index;
+            h += `<div class="cart-group-title">
+                    <span style="display:flex;align-items:center;gap:8px;">Giỏ hàng (Mới thứ ${index + 1}) <button class="ci-delete" onclick="deleteCart(${cart.id})" title="Xóa toàn bộ giỏ hàng" style="padding:2px;font-size:14px;">🗑️</button></span>
+                    <span style="display:flex;align-items:center;gap:12px;">Tổng: ${Number(cartTotal).toLocaleString()}đ
+                        ${cart.items.length ? `<button class="btn btn-primary" style="padding:4px 12px;font-size:12px;" onclick="openCheckoutModal(${cart.id})">Thanh toán</button>` : ""}
+                    </span>
+                </div>`;
+            if (!cart.items.length)
+              h +=
+                '<p style="color:var(--gray-400);font-size:13px;padding:8px 0;">Giỏ hàng trống</p>';
+            cart.items.forEach((i) => {
+              h += `<div class="cart-item">
+                    <div class="ci-info"><h4>${i.product_name}</h4><p>${i.product_type} · SL: ${i.quantity}</p></div>
+                    <div class="ci-actions">
+                        <span class="ci-price">${Number(i.product_price).toLocaleString()}đ</span>
+                        <button class="ci-delete" onclick="removeFromCart(${i.id})" title="Xóa">🗑️</button>
+                    </div>
+                </div>`;
+            });
+          });
+          c.innerHTML = h;
+        } catch (e) {
+          msg("cartModalMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function addToCart(pid, ptype) {
+        if (!cartId) {
+          msg("dashMessage", "Nhấn 🛒 Giỏ hàng để tạo giỏ trước!", "error");
+          return;
+        }
+        try {
+          const r = await fetch(`${API}/api/customers/cart/add/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              cart_id: cartId,
+              product_id: pid,
+              product_type: ptype,
+              quantity: 1,
+            }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            msg("dashMessage", "✅ Đã thêm vào giỏ hàng!", "success");
+            loadCartCount();
+            loadCart();
+          } else msg("dashMessage", d.error, "error");
+        } catch (e) {
+          msg("dashMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function removeFromCart(itemId) {
+        if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?"))
+          return;
+        try {
+          const r = await fetch(`${API}/api/customers/cart/remove/${itemId}/`, {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          if (r.ok) {
+            msg("cartModalMessage", "✅ " + d.message, "success");
+            loadCartCount();
+            loadCart();
+          } else {
+            msg("cartModalMessage", d.error, "error");
+          }
+        } catch (e) {
+          msg("cartModalMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function deleteCart(cartId) {
+        if (!confirm("Bạn có chắc chắn muốn xóa TOÀN BỘ giỏ hàng này?")) return;
+        try {
+          const r = await fetch(`${API}/api/customers/cart/delete/${cartId}/`, {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          if (r.ok) {
+            msg("cartModalMessage", "✅ " + d.message, "success");
+            if (localStorage.getItem("customer_cart_id") == cartId) {
+              localStorage.removeItem("customer_cart_id");
+              window.cartId = null;
+            }
+            loadCartCount();
+            loadCart();
+          } else {
+            msg("cartModalMessage", d.error, "error");
+          }
+        } catch (e) {
+          msg("cartModalMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      // Checkout Flow
+      function openCheckoutModal(cartId) {
+        document.getElementById("checkoutCartId").value = cartId;
+        document.getElementById("checkoutAddress").value = "";
+        document.getElementById("checkoutMessage").className = "message";
+        document.getElementById("checkoutModal").classList.add("active");
+      }
+
+      async function confirmCheckout(e) {
+        e.preventDefault();
+        const cartId = document.getElementById("checkoutCartId").value;
+        const address = document.getElementById("checkoutAddress").value;
+        const method = document.getElementById("checkoutMethod").value;
+
+        // Khách gọi checkout ở đây
+        try {
+          const r = await fetch(
+            `${API}/api/customers/cart/checkout/${cartId}/`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({ address, method }),
+            },
+          );
+          const d = await r.json();
+          if (r.ok) {
+            msg(
+              "dashMessage",
+              "🎉 " + d.message + " (Đã gửi về " + address + ")",
+              "success",
+            );
+            if (localStorage.getItem("customer_cart_id") == cartId) {
+              localStorage.removeItem("customer_cart_id");
+              window.cartId = null;
+            }
+            closeModal("checkoutModal");
+            closeModal("cartModal");
+            loadCartCount();
+            loadAllProducts(); // refresh dashboard to show updated quantity
+          } else {
+            msg("checkoutMessage", d.error, "error");
+          }
+        } catch (e) {
+          msg("checkoutMessage", "Lỗi kết nối hoặc xử lý thanh toán!", "error");
+        }
+      }
+
+      // Profile
+      function openProfileModal() {
+        document.getElementById("profileModal").classList.add("active");
+        loadProfile();
+      }
+
+      // Orders
+      function openOrderModal() {
+        document.getElementById("orderModal").classList.add("active");
+        loadOrders();
+      }
+      async function loadOrders() {
+        const c = document.getElementById("orderContent");
+        c.innerHTML = "Đang tải...";
+        try {
+          const r = await fetch(`${API}/api/customers/orders/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          if (!d.length) {
+            c.innerHTML =
+              '<div class="empty-state"><div class="empty-icon">📦</div>Bạn chưa có đơn hàng nào.</div>';
+            return;
+          }
+          let h = "";
+          d.forEach((order) => {
+            let date = new Date(order.created_at).toLocaleString("vi-VN");
+            let method = order.payment_method.toUpperCase();
+            h += `<div class="cart-group-title" style="flex-direction:column; align-items:flex-start; gap:5px;">
+                    <div style="display:flex; justify-content:space-between; width:100%; font-weight:bold; color:var(--primary);">
+                        <span>Đơn hàng #${order.id} - ${date}</span>
+                        <span>Tổng: ${Number(order.total_amount).toLocaleString()}đ</span>
+                    </div>
+                    <div style="font-size:13px; color:var(--gray-500);">
+                        📍 Giao tới: ${order.address} <br/> 💳 Phương thức: ${method}
+                    </div>
+                </div>`;
+            order.items.forEach((i) => {
+              h += `<div class="cart-item">
+                        <div class="ci-info">
+                            <div class="ci-name">${i.product_name}</div>
+                            <div class="ci-price">${Number(i.product_price).toLocaleString()}đ</div>
+                        </div>
+                        <div class="ci-qty">x${i.quantity}</div>
+                    </div>`;
+            });
+            h += `<hr style="border:none; border-top:1px solid #f0f0f0; margin: 15px 0;">`;
+          });
+          c.innerHTML = h;
+        } catch (e) {
+          msg("orderModalMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function loadProfile() {
+        try {
+          const r = await fetch(`${API}/api/customers/profile/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const d = await r.json();
+          document.getElementById("profileUsername").value = d.username || "";
+          document.getElementById("profileFullName").value = d.full_name || "";
+          document.getElementById("profileEmail").value = d.email || "";
+          document.getElementById("profilePhone").value = d.phone || "";
+          document.getElementById("profilePassword").value = "";
+        } catch (e) {
+          msg("profileMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      async function updateProfile(e) {
+        e.preventDefault();
+        try {
+          const r = await fetch(`${API}/api/customers/profile/update/`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              full_name: document.getElementById("profileFullName").value,
+              email: document.getElementById("profileEmail").value,
+              phone: document.getElementById("profilePhone").value,
+              password: document.getElementById("profilePassword").value,
+            }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            msg("profileMessage", "✅ " + d.message, "success");
+            localStorage.setItem(
+              "customer_name",
+              d.customer.full_name || d.customer.username,
+            );
+            document.getElementById("customerName").textContent =
+              localStorage.getItem("customer_name");
+          } else msg("profileMessage", d.error, "error");
+        } catch (e) {
+          msg("profileMessage", "Lỗi kết nối!", "error");
+        }
+      }
+
+      // ==================== CHATBOT LOGIC ====================
+      function toggleChat() {
+        document.getElementById("chatWindow").classList.toggle("open");
+      }
+
+      async function sendChatMessage() {
+        const input = document.getElementById("chatInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        const chatBody = document.getElementById("chatBody");
+        chatBody.innerHTML += `<div class="chat-msg msg-user">${msg}</div>`;
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+        document.getElementById("chatTyping").style.display = "block";
+
+        try {
+          const response = await fetch(
+            `http://localhost:8006/api/chat?query=${encodeURIComponent(msg)}`,
+          );
+          const data = await response.json();
+          const answer =
+            data.answer || "Xin lỗi, tôi không thể xử lý truy vấn lúc này.";
+
+          document.getElementById("chatTyping").style.display = "none";
+          chatBody.innerHTML += `<div class="chat-msg msg-bot">${answer}</div>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        } catch (err) {
+          document.getElementById("chatTyping").style.display = "none";
+          chatBody.innerHTML += `<div class="chat-msg msg-bot" style="color:var(--danger)">Lỗi kết nối tới AI Service (Port 8006).</div>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+      }
+    </script>
+  </body>
+</html>

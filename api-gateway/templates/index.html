@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop - Hệ Thống Quản Lý Bán Hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-gradient {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.12) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: #667eea; top: -100px; left: -100px; animation-delay: 0s; }
+        .orb-2 { width: 350px; height: 350px; background: #e94560; bottom: -80px; right: -80px; animation-delay: -7s; }
+        .orb-3 { width: 250px; height: 250px; background: #764ba2; top: 40%; left: 60%; animation-delay: -14s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -40px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 15, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 8px; }
+
+        .nav-btn {
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .nav-btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-btn-primary {
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            border: none;
+        }
+
+        .nav-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+        }
+
+        .hero-content { max-width: 800px; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 32px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+            max-width: 550px;
+            margin: 0 auto 48px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 16px 36px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-customer {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-customer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-staff {
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-staff:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(233, 69, 96, 0.5);
+        }
+
+        /* Features */
+        .features {
+            position: relative;
+            z-index: 1;
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card:nth-child(1) .feature-icon { background: rgba(102, 126, 234, 0.15); }
+        .feature-card:nth-child(2) .feature-icon { background: rgba(233, 69, 96, 0.15); }
+        .feature-card:nth-child(3) .feature-icon { background: rgba(16, 185, 129, 0.15); }
+        .feature-card:nth-child(4) .feature-icon { background: rgba(245, 158, 11, 0.15); }
+
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.6;
+        }
+
+        /* Architecture */
+        .architecture {
+            position: relative;
+            z-index: 1;
+            padding: 80px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .arch-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .service-card:nth-child(1) .service-icon { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .service-card:nth-child(2) .service-icon { background: linear-gradient(135deg, #e94560, #ff6b6b); }
+        .service-card:nth-child(3) .service-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+        .service-card:nth-child(4) .service-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+
+        .service-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .service-info p { font-size: 13px; color: rgba(255, 255, 255, 0.4); }
+
+        .db-badges {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .db-badge {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .db-mysql {
+            background: rgba(0, 117, 143, 0.15);
+            border: 1px solid rgba(0, 117, 143, 0.3);
+            color: #4dd0e1;
+        }
+
+        .db-postgres {
+            background: rgba(49, 99, 149, 0.15);
+            border: 1px solid rgba(49, 99, 149, 0.3);
+            color: #64b5f6;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; letter-spacing: -1px; }
+            .hero p { font-size: 15px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .services-grid { grid-template-columns: 1fr; }
+            nav { padding: 16px 20px; }
+            .features { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <span class="logo-text">⚡ TechShop</span>
+        <div class="nav-links">
+            <a href="/customer/login/" class="nav-btn nav-btn-outline">🛒 Khách hàng</a>
+            <a href="/staff/login/" class="nav-btn nav-btn-primary">👨‍💼 Nhân viên</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Microservices Architecture
+            </div>
+            <h1>
+                Hệ Thống<br>
+                <span class="gradient-text">Quản Lý Bán Hàng</span>
+            </h1>
+            <p>
+                Nền tảng quản lý bán hàng Laptop & Mobile hiện đại, 
+                được xây dựng trên kiến trúc Microservices với 4 service độc lập.
+            </p>
+            <div class="hero-buttons">
+                <a href="/customer/login/" class="btn-hero btn-customer">
+                    🛒 Đăng nhập Khách hàng
+                </a>
+                <a href="/staff/login/" class="btn-hero btn-staff">
+                    👨‍💼 Đăng nhập Nhân viên
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <p class="features-title">Tính năng chính</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3>Giỏ hàng thông minh</h3>
+                <p>Khách hàng tạo giỏ hàng, tìm kiếm và thêm sản phẩm laptop, mobile dễ dàng.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Quản lý sản phẩm</h3>
+                <p>Nhân viên thêm mới và cập nhật thông tin sản phẩm laptop, mobile nhanh chóng.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>JWT Authentication</h3>
+                <p>Hai giao diện đăng nhập riêng biệt cho khách hàng và nhân viên với JWT token bảo mật.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Tìm kiếm đa service</h3>
+                <p>Tìm kiếm sản phẩm đồng thời từ laptop-service và mobile-service qua API Gateway.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="architecture">
+        <h2 class="arch-title">Kiến trúc hệ thống</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <div class="service-info">
+                    <h4>Customer Service</h4>
+                    <p>Đăng nhập, giỏ hàng, tìm kiếm · Port 8001</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👨‍💼</div>
+                <div class="service-info">
+                    <h4>Staff Service</h4>
+                    <p>Đăng nhập, thêm/cập nhật sản phẩm · Port 8002</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <div class="service-info">
+                    <h4>Laptop Service</h4>
+                    <p>CRUD & tìm kiếm laptop · Port 8003</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <div class="service-info">
+                    <h4>Mobile Service</h4>
+                    <p>CRUD & tìm kiếm mobile · Port 8004</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="db-badges">
+            <div class="db-badge db-mysql">
+                🐬 MySQL 8.0
+                <span style="opacity:0.6;">customer_db · staff_db</span>
+            </div>
+            <div class="db-badge db-postgres">
+                🐘 PostgreSQL 15
+                <span style="opacity:0.6;">laptop_db · mobile_db</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>TechShop Microservices — Bài kiểm tra Kiến trúc và Thiết kế Phần mềm</p>
+    </footer>
+</body>
+</html>
